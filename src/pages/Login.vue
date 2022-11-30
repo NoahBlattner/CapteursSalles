@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <q-card class="sign-in">
+    <q-card class="login">
       <q-tabs
         v-model="tab"
         class="text-grey"
@@ -9,21 +9,21 @@
         align="justify"
         narrow-indicator
       >
-        <q-tab name="signIn" label="Sign in" />
+        <q-tab name="login" label="Login" />
         <q-tab name="signUp" label="Sign up" />
       </q-tabs>
 
       <q-separator />
 
       <q-tab-panels v-model="tab" animated>
-        <q-tab-panel name="signIn">
-          <div class="text-h6">Sign in</div>
-          <sign-in-form/>
+        <q-tab-panel name="login">
+          <div class="text-h6">Login</div>
+          <LoginForm/>
         </q-tab-panel>
 
         <q-tab-panel name="signUp">
           <div class="text-h6">Sign up</div>
-          <sign-up-form/>
+          <SignUpForm/>
         </q-tab-panel>
       </q-tab-panels>
     </q-card>
@@ -31,22 +31,22 @@
 </template>
 
 <script>
-import SignInForm from '../components/SignIn/SignInForm'
+import LoginForm from 'components/SignIn/LoginForm.vue'
 import SignUpForm from 'components/SignIn/SignUpForm'
 
 export default {
   name: 'SignInPage',
-  components: { SignUpForm, SignInForm },
+  components: { SignUpForm, LoginForm },
   data () {
     return {
-      tab: 'signIn'
+      tab: 'login'
     }
   }
 }
 </script>
 
 <style scoped>
-.sign-in {
+.login {
   max-width: 500px;
   width: auto;
   margin: 0 auto;

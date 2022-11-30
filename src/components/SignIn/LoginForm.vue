@@ -31,7 +31,7 @@
 import { mapActions } from 'vuex'
 
 export default {
-  name: 'SignInForm',
+  name: 'LoginForm',
   data () {
     return {
       form: {
