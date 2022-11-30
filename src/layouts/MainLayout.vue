@@ -28,7 +28,8 @@
         <q-item-label header class="text-black">
           Menu de navigation
         </q-item-label>
-        <PageLink clickable v-for="link in linkList" :link-item="link" :key="link.id" :to="link.path"/>
+        <PageLink v-for="link in linkList" :link-item="link" :key="link.id"/>
+        <PageLink v-if="true /* TODO check if user */" :link-item="this.signInLink"/>
       </q-list>
     </q-drawer>
 
@@ -65,6 +66,12 @@ export default ({
   data () {
     return {
       linkList,
+      signInLink: {
+        title: 'Sign in',
+        caption: 'Sign in',
+        icon: 'account_circle',
+        link: '/login'
+      },
       leftDrawerOpen: false
     }
   },

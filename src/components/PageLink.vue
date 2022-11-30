@@ -1,5 +1,5 @@
 <template>
-  <q-item exact class="text-grey-4">
+  <q-item clickable exact class="text-grey-4" @click="$router.push(linkItem.link)">
     <q-item-section avatar>
       <q-icon color="primary" :name="linkItem.icon" />
     </q-item-section>
@@ -11,9 +11,8 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
 
-export default defineComponent({
+export default ({
   name: 'PageLink',
   props: {
     linkItem: {
