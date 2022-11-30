@@ -15,7 +15,15 @@
           Classroom sensors
         </q-toolbar-title>
 
-        <q-btn @click="btnClick" flat icon-right="account_circle" :label=" (user) ? 'Sign out' : 'Sign in'" class="absolute-right"/>
+        <q-btn @click="btnClick" flat icon-right="account_circle" :label=" (user) ? user : 'Sign in'" class="absolute-right">
+          <q-popup-proxy v-if="user" transition-show="scale" transition-hide="scale">
+            <q-list>
+              <q-item clickable @click="console.log('Not implemented yet') /* TODO Sign out user */" v-close-popup>
+                <q-item-section>Sign out</q-item-section>
+              </q-item>
+            </q-list>
+          </q-popup-proxy>
+        </q-btn>
       </q-toolbar>
     </q-header>
 
