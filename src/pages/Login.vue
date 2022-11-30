@@ -10,7 +10,9 @@
         narrow-indicator
       >
         <q-tab name="login" label="Login" />
+        <!-- commented out for now
         <q-tab name="signUp" label="Sign up" />
+        -->
       </q-tabs>
 
       <q-separator />
@@ -21,10 +23,13 @@
           <LoginForm/>
         </q-tab-panel>
 
+        <!-- Sign up not possible unless administrator
+        sign up commented out until admin access is implemented
         <q-tab-panel name="signUp">
           <div class="text-h6">Sign up</div>
           <SignUpForm/>
         </q-tab-panel>
+        -->
       </q-tab-panels>
     </q-card>
   </q-page>
@@ -32,11 +37,10 @@
 
 <script>
 import LoginForm from 'components/SignIn/LoginForm.vue'
-import SignUpForm from 'components/SignIn/SignUpForm'
 
 export default {
   name: 'SignInPage',
-  components: { SignUpForm, LoginForm },
+  components: { LoginForm },
   data () {
     return {
       tab: 'login'
