@@ -11,11 +11,11 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title>
-          Quasar App
+        <q-toolbar-title class="absolute-center">
+          Classroom sensors
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <q-btn @click="btnClick" flat icon-right="account_circle" :label=" (user) ? 'Sign out' : 'Sign in'" class="absolute-right"/>
       </q-toolbar>
     </q-header>
 
@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
 import PageLink from 'components/PageLink.vue'
 
 const linkList = [
@@ -57,7 +56,7 @@ const linkList = [
   }
 ]
 
-export default defineComponent({
+export default ({
   name: 'MainLayout',
 
   components: {
@@ -65,17 +64,13 @@ export default defineComponent({
   },
   data () {
     return {
-      linkList
+      linkList,
+      leftDrawerOpen: false
     }
   },
-  setup () {
-    const leftDrawerOpen = ref(false)
-
-    return {
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
+  methods: {
+    toggleLeftDrawer () {
+      this.leftDrawerOpen = !this.leftDrawerOpen
     }
   }
 })
