@@ -25,17 +25,10 @@
       bordered
     >
       <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
+        <q-item-label header class="text-black">
+          Menu de navigation
         </q-item-label>
-
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+        <PageLink clickable v-for="link in linkList" :link-item="link" :key="link.id" :to="link.path"/>
       </q-list>
     </q-drawer>
 
@@ -47,50 +40,20 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
+import PageLink from 'components/PageLink.vue'
 
-const linksList = [
+const linkList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
+    title: 'Overview',
+    caption: 'All sensors',
+    icon: 'apps',
+    link: '/'
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
+    title: 'Favorites',
+    caption: 'Your favorite',
     icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
+    link: '/favorites'
   }
 ]
 
@@ -98,14 +61,17 @@ export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    EssentialLink
+    PageLink
   },
-
+  data () {
+    return {
+      linkList
+    }
+  },
   setup () {
     const leftDrawerOpen = ref(false)
 
     return {
-      essentialLinks: linksList,
       leftDrawerOpen,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
