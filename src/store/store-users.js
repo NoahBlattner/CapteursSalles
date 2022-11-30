@@ -81,8 +81,8 @@ const actions = {
         context.commit('SET_USER', null)
         context.commit('SET_TOKEN', null)
         LocalStorage.clear()
-        context.dispatch('tasks/AC_ClearTasks', null, { root: true })
         Loading.hide()
+        this.router.push('/login')
       })
   }
 }

@@ -9,18 +9,19 @@
           icon="menu"
           aria-label="Menu"
           @click="toggleLeftDrawer"
+          class="gt-xs"
         />
 
         <q-toolbar-title class="absolute-center">
           Classroom sensors
         </q-toolbar-title>
 
-        <q-btn @click="btnClick" flat icon-right="account_circle" :label=" (user) ? user : 'Sign in'" class="absolute-right">
-          <q-popup-proxy v-if="user" transition-show="scale" transition-hide="scale">
+        <q-btn @click="btnClick" flat icon-right="account_circle" :label="(user) ? user.nom : 'Sign in'" class="absolute-right">
+          <q-popup-proxy v-if="user" transition-show="scale" transition-hide="scale" class="no-border-radius">
             <q-list>
-              <q-item clickable @click="console.log('Not implemented yet') /* TODO Sign out user */" v-close-popup>
-                <q-item-section>Sign out</q-item-section>
-              </q-item>
+              <q-btn class="full-width bg-red-6 no-border-radius" @click="logout">
+                Logout
+              </q-btn>
             </q-list>
           </q-popup-proxy>
         </q-btn>
@@ -29,7 +30,7 @@
 
     <q-drawer
       v-model="leftDrawerOpen"
-      show-if-above
+      class="gt-xs"
       bordered
     >
       <q-list>
@@ -37,9 +38,20 @@
           Menu de navigation
         </q-item-label>
         <PageLink v-for="link in linkList" :link-item="link" :key="link.id"/>
-        <PageLink v-if="true /* TODO check if user */" :link-item="this.signInLink"/>
+        <PageLink v-if="!user" :link-item="this.signInLink"/>
       </q-list>
     </q-drawer>
+
+    <q-footer elevated class="lt-sm">
+      <q-tabs>
+        <q-route-tab v-for="link in linkList" :key="link.id"
+                     :to="link.path"
+                     :icon="link.icon"
+                     :label="link.text"
+                     exact
+        />
+      </q-tabs>
+    </q-footer>
 
     <q-page-container>
       <router-view />
@@ -49,6 +61,7 @@
 
 <script>
 import PageLink from 'components/PageLink.vue'
+import { mapActions, mapGetters } from 'vuex'
 
 const linkList = [
   {
@@ -84,9 +97,22 @@ export default ({
     }
   },
   methods: {
+    ...mapActions('users', ['AC_DisconnectUser']),
     toggleLeftDrawer () {
       this.leftDrawerOpen = !this.leftDrawerOpen
+    },
+    btnClick () {
+      if (!this.user) {
+        this.$router.push('/login')
+      }
+    },
+    logout () {
+      this.$router.push('/login')
+      this.AC_DisconnectUser()
     }
+  },
+  computed: {
+    ...mapGetters('users', ['user'])
   }
 })
 </script>
