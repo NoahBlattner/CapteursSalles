@@ -74,7 +74,7 @@ const actions = {
     }
     api.post('/logout', {}, config)
       .catch(function (error) {
-        showErrorMessage('An error occurred while login out.')
+        showErrorMessage('An error occurred while login out.', Object.values(error?.response?.data ?? {}))
         throw error
       })
       .finally(function () {
