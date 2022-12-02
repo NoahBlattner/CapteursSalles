@@ -5,7 +5,7 @@
   >
     <q-card :class="row.selected ? 'bg-grey-2' : ''">
       <q-card-section>
-        <div class="text-h6">{{ row.name }}</div>
+        <div class="text-h6">{{ row.salle.nom }}</div>
       </q-card-section>
       <q-separator />
       <q-list dense>

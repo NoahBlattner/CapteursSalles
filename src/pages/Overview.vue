@@ -42,7 +42,7 @@ export default {
           required: true,
           label: 'Room',
           align: 'center',
-          field: row => row.name,
+          field: row => row.salle.nom,
           sortable: true
         },
         {
@@ -50,7 +50,7 @@ export default {
           required: true,
           label: 'Humidity',
           align: 'center',
-          field: row => row.humidity,
+          field: row => row.mesures[0].humidite,
           sortable: true
         },
         {
@@ -58,7 +58,7 @@ export default {
           required: true,
           label: 'Temperature',
           align: 'center',
-          field: row => row.temperature,
+          field: row => row.mesures[0].temperature,
           sortable: true
         }
       ]
@@ -71,7 +71,9 @@ export default {
     ...mapGetters('sensors', ['sensorList'])
   },
   mounted () {
-    this.AC_GetSensorsAPI()
+    setTimeout(() => {
+      this.AC_GetSensorsAPI()
+    }, 1000)
   }
 }
 </script>
