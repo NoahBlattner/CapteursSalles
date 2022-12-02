@@ -27,7 +27,7 @@ const actions = {
   AC_GetSensorsAPI (context) {
     context.commit('SET_LOADED', false)
     const config = {
-      headers: { Authorization: 'Bearer ' + context.rootState.token }
+      headers: { Authorization: 'Bearer ' + context.rootState.users.token }
     }
     api.get('/capteurs', config)
       .then(function (response) {

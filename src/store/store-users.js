@@ -56,12 +56,12 @@ const actions = {
         throw error
       })
   },
-  AC_SetUser (context, user) {
+  AC_SetUser (context, userData) {
     // Set user data
-    context.commit('SET_USER', user.user)
-    context.commit('SET_TOKEN', user.access_token)
-    LocalStorage.set('user', user.user)
-    LocalStorage.set('token', user.access_token)
+    context.commit('SET_USER', userData.user)
+    context.commit('SET_TOKEN', userData.access_token)
+    LocalStorage.set('user', userData.user)
+    LocalStorage.set('token', userData.access_token)
 
     // Reroute to main page
     this.$router.push('/')
@@ -82,7 +82,6 @@ const actions = {
         context.commit('SET_TOKEN', null)
         LocalStorage.clear()
         Loading.hide()
-        this.router.push('/login')
       })
   }
 }
@@ -95,6 +94,9 @@ Sert à calculer, trier, filtrer ou formater les données
 const getters = {
   user: function (state) {
     return state.user
+  },
+  token: function (state) {
+    return state.token
   }
 }
 

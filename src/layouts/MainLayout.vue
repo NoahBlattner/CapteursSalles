@@ -102,6 +102,7 @@ export default ({
   },
   methods: {
     ...mapActions('users', ['AC_DisconnectUser', 'AC_SetUser']),
+    ...mapActions('sensors', ['AC_GetSensorsAPI']),
     toggleLeftDrawer () {
       this.leftDrawerOpen = !this.leftDrawerOpen
     },
@@ -111,16 +112,18 @@ export default ({
       }
     },
     logout () {
-      this.$router.push('/login')
       this.AC_DisconnectUser()
+      this.$router.push('/login')
     }
   },
   computed: {
-    ...mapGetters('users', ['user'])
+    ...mapGetters('users', ['user', 'token'])
   },
   mounted () {
-    this.AC_SetUser({ user: LocalStorage.getItem('user'), token: LocalStorage.getItem('token') })
-    if (!this.user) {
+    this.AC_SetUser({ user: LocalStorage.getItem('user'), access_token: LocalStorage.getItem('token') })
+    if (this.token) {
+      this.AC_GetSensorsAPI()
+    } else {
       this.$router.push('/login')
     }
   }

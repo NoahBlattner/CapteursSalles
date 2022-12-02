@@ -35,9 +35,6 @@ export default {
     row () {
       return this.gridElementData.row
     }
-  },
-  mounted () {
-    console.log(this.gridElementData)
   }
 }
 </script>
