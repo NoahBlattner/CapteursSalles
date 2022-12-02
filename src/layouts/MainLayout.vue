@@ -93,7 +93,7 @@ export default ({
         icon: 'account_circle',
         link: '/login'
       },
-      leftDrawerOpen: false
+      leftDrawerOpen: true
     }
   },
   methods: {
@@ -113,6 +113,11 @@ export default ({
   },
   computed: {
     ...mapGetters('users', ['user'])
+  },
+  mounted () {
+    if (!this.user) {
+      this.$router.push('/login')
+    }
   }
 })
 </script>
