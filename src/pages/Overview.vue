@@ -5,7 +5,7 @@
       grid
       :columns="columns"
       :rows="sensorList"
-      :rows-per-page-options="[5, 10, 15]"
+      :rows-per-page-options="[4, 8, 12]"
       binary-state-sort
       class="q-pa-sm"
     >
@@ -29,6 +29,7 @@
 <script>
 
 import SensorView from 'components/Sensor.vue'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'OverviewPage',
@@ -60,38 +61,17 @@ export default {
           field: row => row.temperature,
           sortable: true
         }
-      ],
-      sensorList: [
-        {
-          id: 1,
-          name: 'Sensor 1',
-          humidity: 50,
-          temperature: 20,
-          description: 'This is the first sensor'
-        },
-        {
-          id: 2,
-          name: 'Sensor 2',
-          humidity: 60,
-          temperature: 25,
-          description: 'This is the second sensor'
-        },
-        {
-          id: 3,
-          name: 'Sensor 3',
-          humidity: 70,
-          temperature: 30,
-          description: 'This is the third sensor'
-        },
-        {
-          id: 4,
-          name: 'Sensor 4',
-          humidity: 80,
-          temperature: 35,
-          description: 'This is the fourth sensor'
-        }
       ]
     }
+  },
+  methods: {
+    ...mapActions('sensors', ['AC_GetSensorsAPI'])
+  },
+  computed: {
+    ...mapGetters('sensors', ['sensorList'])
+  },
+  mounted () {
+    this.AC_GetSensorsAPI()
   }
 }
 </script>
