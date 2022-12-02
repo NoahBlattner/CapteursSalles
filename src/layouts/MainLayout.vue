@@ -55,7 +55,7 @@
 
     <q-page-container>
       <div class="full-width">
-        <q-img src="divtec.png" width="200px" class="monimage vertical-middle q-mt-lg q-ml-lg" />
+        <q-img src="divtec.png" width="200px" class="image-center vertical-middle q-mt-lg q-ml-lg" />
       </div>
       <router-view />
     </q-page-container>
@@ -127,7 +127,7 @@ export default ({
 })
 </script>
 <style scoped>
-  .monimage {
+  .image-center {
     display: block;
     margin: 2em auto auto auto;
   }
