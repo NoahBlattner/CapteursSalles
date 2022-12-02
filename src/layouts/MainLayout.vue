@@ -54,6 +54,9 @@
     </q-footer>
 
     <q-page-container>
+      <div class="full-width">
+        <q-img src="divtec.png" width="200px" class="monimage vertical-middle q-mt-lg q-ml-lg" />
+      </div>
       <router-view />
     </q-page-container>
   </q-layout>
@@ -123,3 +126,9 @@ export default ({
   }
 })
 </script>
+<style scoped>
+  .monimage {
+    display: block;
+    margin: 2em auto auto auto;
+  }
+</style>
