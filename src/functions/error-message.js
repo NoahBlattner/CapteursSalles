@@ -12,7 +12,7 @@ export function showErrorMessage (message, errors = null, defaultMessage = 'Unkn
     message += '<ul><li>' + errors + '</li></ul>'
   } else {
     errors = Object.assign(errors)
-    message += errors.join('</li><li>') + '</li></ul>'
+    message += '<ul><li>' + errors.join('</li><li>') + '</li></ul>'
   }
 
   // Crée et affiche la boite de dialogue
