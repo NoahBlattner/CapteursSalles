@@ -62,6 +62,7 @@
 <script>
 import PageLink from 'components/PageLink.vue'
 import { mapActions, mapGetters } from 'vuex'
+import { LocalStorage } from 'quasar'
 
 const linkList = [
   {
@@ -97,7 +98,7 @@ export default ({
     }
   },
   methods: {
-    ...mapActions('users', ['AC_DisconnectUser']),
+    ...mapActions('users', ['AC_DisconnectUser', 'AC_SetUser']),
     toggleLeftDrawer () {
       this.leftDrawerOpen = !this.leftDrawerOpen
     },
@@ -115,6 +116,7 @@ export default ({
     ...mapGetters('users', ['user'])
   },
   mounted () {
+    this.AC_SetUser({ user: LocalStorage.getItem('user'), token: LocalStorage.getItem('token') })
     if (!this.user) {
       this.$router.push('/login')
     }
