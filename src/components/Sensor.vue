@@ -4,11 +4,14 @@
     :style="row.selected ? 'transform: scale(0.95);' : ''"
   >
     <q-card :class="row.selected ? 'bg-grey-2' : ''">
-      <q-card-section>
-        <div class="text-h6">{{ row.salle.nom }}</div>
+      <q-card-section class="q-pb-sm">
+        <div class="text-h5">{{ row.salle.nom }}</div>
       </q-card-section>
       <q-separator />
-      <q-list dense>
+      <q-card-section class="q-pb-sm">
+        <div class="text-h6 text-subtitle1">Latest readings :</div>
+      </q-card-section>
+      <q-list class="q-ml-md" dense>
         <q-item v-for="col in gridElementData.cols.filter(col => col.name !== 'room')" :key="col.name">
           <q-item-section>
             <q-item-label>{{ col.label }}</q-item-label>

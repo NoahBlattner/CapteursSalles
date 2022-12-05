@@ -119,7 +119,7 @@ export default ({
   computed: {
     ...mapGetters('users', ['user', 'token'])
   },
-  mounted () {
+  created () {
     this.AC_SetUser({ user: LocalStorage.getItem('user'), access_token: LocalStorage.getItem('token') })
     if (this.token) {
       this.AC_GetSensorsAPI()

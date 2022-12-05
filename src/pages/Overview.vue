@@ -50,7 +50,7 @@ export default {
           required: true,
           label: 'Humidity',
           align: 'center',
-          field: row => row.mesures[0].humidite,
+          field: row => row.mesures[0].humidite + '%',
           sortable: true
         },
         {
@@ -58,7 +58,7 @@ export default {
           required: true,
           label: 'Temperature',
           align: 'center',
-          field: row => row.mesures[0].temperature,
+          field: row => row.mesures[0].temperature + '°C',
           sortable: true
         }
       ]
@@ -71,9 +71,7 @@ export default {
     ...mapGetters('sensors', ['sensorList'])
   },
   mounted () {
-    setTimeout(() => {
-      this.AC_GetSensorsAPI()
-    }, 1000)
+    this.AC_GetSensorsAPI()
   }
 }
 </script>
