@@ -19,6 +19,7 @@ export function showErrorMessage (message, errors = null, defaultMessage = 'Unkn
   Dialog.create({
     title: 'Error', // Titre de la dialog
     message, // Message de la dialog
-    html: true // Html utilisable dans le message
+    html: true, // Html utilisable dans le message
+    persistent: true // La dialog ne peut pas être fermée
   })
 }

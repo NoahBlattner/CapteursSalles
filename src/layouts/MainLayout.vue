@@ -75,10 +75,10 @@ const linkList = [
     link: '/'
   },
   {
-    title: 'Favorites',
-    caption: 'Your favorite',
-    icon: 'favorite',
-    link: '/favorites'
+    title: 'Settings',
+    caption: 'Settings',
+    icon: 'settings',
+    link: '/settings'
   }
 ]
 
@@ -120,11 +120,13 @@ export default ({
     ...mapGetters('users', ['user', 'token'])
   },
   created () {
-    this.AC_SetUser({ user: LocalStorage.getItem('user'), access_token: LocalStorage.getItem('token') })
-    if (this.token) {
-      this.AC_GetSensorsAPI()
-    } else {
-      this.$router.push('/login')
+    if (LocalStorage.has('user') && LocalStorage.has('token')) {
+      this.AC_SetUser({ user: LocalStorage.getItem('user'), access_token: LocalStorage.getItem('token') })
+      if (this.token) {
+        this.AC_GetSensorsAPI()
+      } else {
+        this.$router.push('/login')
+      }
     }
   }
 })

@@ -1,3 +1,4 @@
+// import { showErrorMessage } from 'src/functions/error-message'
 import { LocalStorage } from 'quasar'
 import { showErrorMessage } from 'src/functions/error-message'
 
@@ -7,15 +8,11 @@ export default ({ router }) => {
   router.beforeEach((to, from, next) => {
     // Récupère
     const user = LocalStorage.getItem('user')
-    // Si PAS connecté et ne vas par vers /connexion on force la redirection
-    if (!user && to.path !== '/login') {
-      // Affiche un message d'erreur uniquement si utilisateur tente d'accéder
-      // à une autre page après avoir été redirigé vers la connexion une 1re
-      // fois.
-      if (from.path === '/login') {
-        showErrorMessage('Access unauthorized ! Please sign in to access this page.', null, null)
-      }
-      next('/login') // Redirige vers /connexion
+    console.log(user, to.path)
+    // Si PAS connecté et ne vas par vers /login, on force la redirection
+    if (!user && to.path === '/') {
+      showErrorMessage('Access unauthorized !', null, 'Please sign in to access this page.')
+      next('/login') // Redirige vers /login
     } else {
       next() // Continue la navigation normalement
     }
