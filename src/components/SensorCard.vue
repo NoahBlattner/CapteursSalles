@@ -3,30 +3,36 @@
     class="q-pa-xs col-xs-12 col-sm-6 col-md-4 col-lg-3 grid-style-transition"
     :style="row.selected ? 'transform: scale(0.95);' : ''"
   >
-    <q-card :class="focus ? 'fill-screen' : ''">
+    <q-card :class="details ? 'fill-screen' : ''">
       <q-card-section class="q-pb-sm">
         <div class="text-h5 text-center">{{ row.salle.nom }}</div>
       </q-card-section>
       <q-separator />
       <SensorSimple
+        v-if="!details"
         :grid-element-data="gridElementData"
         :date-time="{date, time}"
-        @viewDetails="viewDetails"/>
+        @viewDetails="viewDetails(true)"/>
+      <SensorDetails
+        v-else
+        :grid-element-data="gridElementData"
+        @viewSimple="viewDetails(false)"/>
     </q-card>
   </div>
-  <div id="grayout" v-if="focus"></div>
+  <div id="grayout" v-if="details"></div>
 </template>
 
 <script>
 import { date } from 'quasar'
 import SensorSimple from 'components/SensorSimple.vue'
+import SensorDetails from 'components/SensorDetails.vue'
 
 export default {
   name: 'SensorView',
-  components: { SensorSimple },
+  components: { SensorDetails, SensorSimple },
   data () {
     return {
-      focus: false
+      details: false
     }
   },
   props: {
@@ -36,8 +42,8 @@ export default {
     }
   },
   methods: {
-    viewDetails () {
-      this.focus = true
+    viewDetails (viewDetails) {
+      this.details = viewDetails
     }
   },
   computed: {
