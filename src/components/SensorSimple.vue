@@ -18,13 +18,6 @@
     </q-list>
   </q-card-section>
   <q-card-section class="q-pa-none">
-    <q-btn
-      class="q-ma-none full-width top-no-border-radius"
-      color="white"
-      text-color="primary"
-      label="View all readings"
-      @click="$emit('viewDetails')"
-    />
   </q-card-section>
 </template>
 
@@ -45,5 +38,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

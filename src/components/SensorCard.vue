@@ -16,7 +16,14 @@
       <SensorDetails
         v-else
         :grid-element-data="gridElementData"
-        @viewSimple="viewDetails(false)"/>
+        @closeDetails="viewDetails(false)"/>
+      <q-btn
+        class="q-ma-none full-width top-no-border-radius"
+        color="white"
+        text-color="primary"
+        :label="details ? 'Close' : 'View graph'"
+        @click="toggleDetails"
+      />
     </q-card>
   </div>
   <div id="grayout" v-if="details"></div>
@@ -42,8 +49,8 @@ export default {
     }
   },
   methods: {
-    viewDetails (viewDetails) {
-      this.details = viewDetails
+    toggleDetails () {
+      this.details = !this.details
     }
   },
   computed: {
@@ -81,7 +88,7 @@ export default {
   max-height: 100vh;
   max-width: 100vw;
   width: 80vw;
-  height: 80vh;
+  height: 70vh;
   border-radius: 10px;
   z-index: 10001;
   position: fixed;
