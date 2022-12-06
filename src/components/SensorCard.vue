@@ -19,9 +19,11 @@
 
 <script>
 import { date } from 'quasar'
+import SensorSimple from 'components/SensorSimple.vue'
 
 export default {
   name: 'SensorView',
+  components: { SensorSimple },
   data () {
     return {
       focus: false
@@ -66,17 +68,16 @@ export default {
   border-top-right-radius: 0;
 }
 .fill-screen {
-  top: 0;
-  left: 0;
+  top: 10vh;
+  left: 10vw;
   right: 0;
   bottom: 0;
-  max-height: 80vh;
-  max-width: 80vw;
+  max-height: 100vh;
+  max-width: 100vw;
   width: 80vw;
   height: 80vh;
   border-radius: 10px;
   z-index: 10001;
-  margin: 50px 80px;
   position: fixed;
   animation: zoomIn .5s forwards;
 }
