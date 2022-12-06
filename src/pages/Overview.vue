@@ -6,13 +6,14 @@
       :columns="columns"
       :rows="sensorList"
       :rows-per-page-options="[4, 8, 12]"
-      binary-state-sort
       class="q-pa-sm"
+      :filter="filter"
+      sort-method=""
     >
       <template v-slot:top-right>
-        <q-input borderless dense debounce="300" v-model="filter" placeholder="Search">
+        <q-input dense debounce="300" v-model="filter" placeholder="Search">
           <template v-slot:append>
-            <q-icon name="Search" />
+            <q-icon name="search" />
           </template>
         </q-input>
       </template>
@@ -36,6 +37,7 @@ export default {
   components: { SensorView },
   data () {
     return {
+      filter: '',
       columns: [
         {
           name: 'room',
@@ -43,7 +45,8 @@ export default {
           label: 'Room',
           align: 'center',
           field: row => row.salle.nom,
-          sortable: true
+          sortable: true,
+          searchable: true
         },
         {
           name: 'humidity',
@@ -51,7 +54,8 @@ export default {
           label: 'Humidity',
           align: 'center',
           field: row => row.mesures[0].humidite + '%',
-          sortable: true
+          sortable: true,
+          searchable: true
         },
         {
           name: 'temperature',
@@ -59,7 +63,8 @@ export default {
           label: 'Temperature',
           align: 'center',
           field: row => row.mesures[0].temperature + '°C',
-          sortable: true
+          sortable: true,
+          searchable: true
         }
       ]
     }
