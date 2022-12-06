@@ -3,38 +3,15 @@
     class="q-pa-xs col-xs-12 col-sm-6 col-md-4 col-lg-3 grid-style-transition"
     :style="row.selected ? 'transform: scale(0.95);' : ''"
   >
-    <q-card :class="focus ? 'fill-screen' : 'unmodified'">
+    <q-card :class="focus ? 'fill-screen' : ''">
       <q-card-section class="q-pb-sm">
         <div class="text-h5 text-center">{{ row.salle.nom }}</div>
       </q-card-section>
       <q-separator />
-      <q-card-section class="q-pt-sm">
-        <!-- time and date -->
-        <div class="text-subtitle2 absolute-center q-mt-sm underline fullscreen">
-          {{ this.date + ' | ' + this.time }}
-        </div>
-      </q-card-section>
-      <q-card-section class="q-pb-sm">
-        <q-list dense>
-          <q-item v-for="col in gridElementData.cols.filter(col => col.name !=='room')" :key="col.name">
-            <q-item-section>
-              <q-item-label>{{ col.label }}</q-item-label>
-            </q-item-section>
-            <q-item-section side>
-              <q-item-label caption>{{ col.value }}</q-item-label>
-            </q-item-section>
-          </q-item>
-        </q-list>
-      </q-card-section>
-      <q-card-section class="q-pa-none">
-        <q-btn
-          class="q-ma-none full-width top-no-border-radius"
-          color="white"
-          text-color="primary"
-          label="View all readings"
-          @click="viewAll()"
-        />
-      </q-card-section>
+      <SensorSimple
+        :grid-element-data="gridElementData"
+        :date-time="{date, time}"
+        @viewDetails="viewDetails"/>
     </q-card>
   </div>
   <div id="grayout" v-if="focus"></div>
@@ -57,7 +34,7 @@ export default {
     }
   },
   methods: {
-    viewAll () {
+    viewDetails () {
       this.focus = true
     }
   },
@@ -93,27 +70,57 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  max-width: 100vw;
-  max-height: 100vh;
-  position: fixed;
+  max-height: 80vh;
+  max-width: 80vw;
+  width: 80vw;
+  height: 80vh;
   border-radius: 10px;
   z-index: 10001;
   margin: 50px 80px;
-  animation: zoomIn .5s;
+  position: fixed;
+  animation: zoomIn .5s forwards;
 }
 @keyframes zoomIn {
   from {
-    transform: scale3d(.3, .3, .3);
+    transform: scale(.3);
+  }
+  to {
+    transform: scale(1);
   }
 }
+/*
+@keyframes zoomIn {
+  99% {
+    position: center;
+  }
+  to {
+    top: 15vh;
+    left: 15vw;
+    width: 70vw;
+    height: 70vh;
+    max-height: 80vh;
+    max-width: 80vw;
+    position: fixed;
+  }
+}
+ */
 #grayout {
   position: fixed;
-  left: 0px;
-  top: 0px;
+  left: 0;
+  top: 0;
   height: 100%;
   width: 100%;
   background-color: black;
   opacity: 0.5;
   z-index: 10000;
+  animation: fadeIn .5s;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.5;
+  }
 }
 </style>

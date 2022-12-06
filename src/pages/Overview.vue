@@ -19,7 +19,7 @@
       </template>
 
       <template v-slot:item="gridElement">
-        <SensorView :grid-element-data="gridElement" />
+        <SensorCard :grid-element-data="gridElement" />
       </template>
     </q-table>
     <q-list bordered class="rounded-borders">
@@ -29,12 +29,12 @@
 
 <script>
 
-import SensorView from 'components/Sensor.vue'
+import SensorCard from 'components/SensorCard.vue'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'OverviewPage',
-  components: { SensorView },
+  components: { SensorCard },
   data () {
     return {
       filter: '',
