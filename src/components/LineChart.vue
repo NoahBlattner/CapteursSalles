@@ -1,6 +1,5 @@
 <template>
-  <div class="q-ma-lg">
-    <q-card>
+    <q-card class="q-pa-md">
       <q-card-section className="text-h6">
         Line Chart
       </q-card-section>
@@ -9,7 +8,6 @@
       </q-card-section>
       <q-resize-observer @resize="onResize"/>
     </q-card>
-  </div>
 </template>
 
 <script>
