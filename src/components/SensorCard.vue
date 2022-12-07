@@ -49,25 +49,26 @@ export default {
     }
   },
   methods: {
+    // Toggle the details view
     toggleDetails () {
       this.details = !this.details
     }
   },
   computed: {
+    // Get the current row
     row () {
       return this.gridElementData.row
     },
+    // Get the date of the last update
     date () {
       const dateToFormat = new Date(this.row.mesures[0].date)
       return date.formatDate(dateToFormat, 'D MMM YYYY')
     },
+    // Get the time of the last update
     time () {
       const dateToFormat = new Date(this.row.mesures[0].date)
       return date.formatDate(dateToFormat, 'HH:mm')
     }
-  },
-  mounted () {
-    console.log(this.gridElementData)
   }
 }
 </script>

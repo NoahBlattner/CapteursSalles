@@ -37,7 +37,9 @@ export default {
   components: { SensorCard },
   data () {
     return {
+      // The filter for the table
       filter: '',
+      // Columns for the table
       columns: [
         {
           name: 'room',

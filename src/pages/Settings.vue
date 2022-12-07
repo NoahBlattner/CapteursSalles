@@ -1,6 +1,5 @@
 <template>
   <q-page className="flex flex-center">
-    TODO
   </q-page>
 </template>
 
