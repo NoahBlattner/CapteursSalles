@@ -33,6 +33,7 @@
 import { date } from 'quasar'
 import SensorSimple from 'components/Sensors/SensorSimple.vue'
 import SensorDetails from 'components/Sensors/SensorDetails.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'SensorView',
@@ -55,6 +56,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('settings', ['timeFormat', 'dateFormat']),
     // Get the current row
     row () {
       return this.gridElementData.row
@@ -62,12 +64,12 @@ export default {
     // Get the date of the last update
     date () {
       const dateToFormat = new Date(this.row.mesures[0].date)
-      return date.formatDate(dateToFormat, 'D MMM YYYY')
+      return date.formatDate(dateToFormat, this.dateFormat)
     },
     // Get the time of the last update
     time () {
       const dateToFormat = new Date(this.row.mesures[0].date)
-      return date.formatDate(dateToFormat, 'HH:mm')
+      return date.formatDate(dateToFormat, this.timeFormat)
     }
   }
 }

@@ -1,18 +1,18 @@
 <template>
-  <q-page className="flex flex-center">
-    <q-list padding>
-      <SettingElement v-for="setting in settingsList" :setting-options="setting" :key="setting.label" />
+  <q-page padding>
+    <q-list bordered padding class="q-ma-lg">
+      <SettingElement v-for="setting in settingsList" :setting="setting" :key="setting.label" />
     </q-list>
   </q-page>
 </template>
 
 <script>
 
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import SettingElement from 'components/SettingElement.vue'
 
 export default ({
-  name: 'PageFavoris',
+  name: 'SettingsPage',
   components: {
     SettingElement
   },
@@ -20,19 +20,9 @@ export default ({
     return {
       settingsList: [
         {
-          label: 'Time format',
+          label: 'Use 12h format',
           icon: 'time',
-          defaultValue: 'HH:mm',
-          states: [
-            {
-              label: '24h format',
-              value: 'HH:mm'
-            },
-            {
-              label: '12h format',
-              value: 'hh:mm'
-            }
-          ],
+          value: this.getIs12hFormat(),
           action: (value) => {
             this.AC_SetTimeFormat(value)
           }
@@ -40,7 +30,7 @@ export default ({
         {
           label: 'Date format',
           icon: 'date',
-          defaultValue: 'D MMM YYYY',
+          value: this.getDateFormat(),
           states: [
             {
               label: '1 Dec 2020',
@@ -66,8 +56,23 @@ export default ({
       ]
     }
   },
+  computed: {
+    ...mapGetters('settings', ['dateFormat', 'is12hFormat'])
+  },
   methods: {
-    ...mapActions('settings', ['AC_SetDateFormat', 'AC_SetTimeFormat'])
+    ...mapActions('settings', ['AC_SetDateFormat', 'AC_SetTimeFormat']),
+    getDateFormat () {
+      return this.dateFormat
+    },
+    getIs12hFormat () {
+      return this.is12hFormat
+    }
   }
 })
 </script>
+
+<style scoped lang="scss">
+.thing {
+  width: fit-content;
+}
+</style>

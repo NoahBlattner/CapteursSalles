@@ -63,8 +63,6 @@ const actions = {
     LocalStorage.set('user', userData.user)
     LocalStorage.set('token', userData.access_token)
 
-    // Reroute to main page
-    this.$router.push('/')
     Loading.hide()
   },
   AC_DisconnectUser (context) {

@@ -22,8 +22,12 @@ Actions : méthodes du magasin qui font appel aux mutations.
 Elles peuvent être asynchrones !
  */
 const actions = {
-  AC_SetTimeFormat (context, timeFormat) {
-    context.commit('SET_TIME_FORMAT', timeFormat)
+  AC_SetTimeFormat (context, use12hFormat) {
+    if (use12hFormat) {
+      context.commit('SET_TIME_FORMAT', 'hh:mm')
+    } else {
+      context.commit('SET_TIME_FORMAT', 'HH:mm')
+    }
   },
   AC_SetDateFormat (context, dateFormat) {
     context.commit('SET_DATE_FORMAT', dateFormat)
@@ -41,6 +45,9 @@ const getters = {
   },
   dateFormat: function (state) {
     return state.dateFormat
+  },
+  is12hFormat: function (state) {
+    return state.timeFormat === 'hh:mm'
   }
 }
 
