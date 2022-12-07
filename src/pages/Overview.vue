@@ -29,7 +29,7 @@
 
 <script>
 
-import SensorCard from 'components/SensorCard.vue'
+import SensorCard from 'components/Sensors/SensorCard.vue'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {

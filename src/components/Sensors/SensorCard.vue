@@ -31,8 +31,8 @@
 
 <script>
 import { date } from 'quasar'
-import SensorSimple from 'components/SensorSimple.vue'
-import SensorDetails from 'components/SensorDetails.vue'
+import SensorSimple from 'components/Sensors/SensorSimple.vue'
+import SensorDetails from 'components/Sensors/SensorDetails.vue'
 
 export default {
   name: 'SensorView',

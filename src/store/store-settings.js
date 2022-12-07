@@ -22,9 +22,8 @@ Actions : méthodes du magasin qui font appel aux mutations.
 Elles peuvent être asynchrones !
  */
 const actions = {
-  AC_SwitchTimeFormat (context) {
-    const newTimeFormat = (this.timeFormat === 'HH:mm') ? 'hh:mm' : 'HH:mm'
-    context.commit('SET_TIME_FORMAT', newTimeFormat)
+  AC_SetTimeFormat (context, timeFormat) {
+    context.commit('SET_TIME_FORMAT', timeFormat)
   },
   AC_SetDateFormat (context, dateFormat) {
     context.commit('SET_DATE_FORMAT', dateFormat)
