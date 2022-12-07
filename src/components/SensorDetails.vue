@@ -1,23 +1,15 @@
 <template>
-  <div class="q-ma-lg">
-      <q-card>
-        <q-card-section className="text-h6">
-          Line Chart
-        </q-card-section>
-        <q-card-section>
-          <div ref="linechart" id="lineChart" style="height: 300px;"></div>
-        </q-card-section>
-        <q-resize-observer @resize="onResize"/>
-      </q-card>
-  </div>
+  <LineChart :options="options" />
 </template>
 
 <script>
-import * as echarts from 'echarts'
 import { toRaw } from 'vue'
+import { date } from 'quasar'
+import LineChart from 'components/LineChart.vue'
 
 export default {
   name: 'SensorDetails',
+  components: { LineChart },
   props: {
     gridElementData: {
       required: true,
@@ -25,33 +17,33 @@ export default {
     }
   },
   methods: {
+    // Get all temperatures from the mesures array in reverse order
     getTemperatureList () {
       const temperatureList = []
       const row = toRaw(this.gridElementData.row)
       row.mesures.forEach(mesure => {
-        temperatureList.push(mesure.temperature)
+        temperatureList.unshift(mesure.temperature)
       })
       return temperatureList
     },
+    // Get all humidity percentages from the mesures array in reverse order
     getHumidityList () {
       const humidityList = []
       const row = toRaw(this.gridElementData.row)
       row.mesures.forEach(mesure => {
-        humidityList.push(mesure.humidite)
+        humidityList.unshift(mesure.humidite)
       })
       return humidityList
     },
-    init () {
-      const lineChart = document.getElementById('lineChart')
-      echarts.dispose(lineChart)
-      const theme = this.model ? 'dark' : 'light'
-      this.line_chart = echarts.init(lineChart, theme)
-      this.line_chart.setOption(this.options)
-    },
-    onResize () {
-      if (this.line_chart) {
-        this.line_chart.resize()
-      }
+    // Get all timestamps from the mesures array in reverse order
+    getTimeList () {
+      const timeList = []
+      const row = toRaw(this.gridElementData.row)
+      row.mesures.forEach(mesure => {
+        const dateToFormat = new Date(mesure.date)
+        timeList.unshift(date.formatDate(dateToFormat, 'HH:mm'))
+      })
+      return timeList
     },
     toRaw (value) {
       return toRaw(value)
@@ -59,7 +51,7 @@ export default {
   },
   data () {
     return {
-      model: false,
+      // Line chart options
       options: {
         color: ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
         tooltip: {
@@ -86,7 +78,7 @@ export default {
           {
             type: 'category',
             boundaryGap: false,
-            data: this.gridElementData.row.mesures.map(mesure => mesure.date)
+            data: this.getTimeList()
           }
         ],
         yAxis: [
@@ -98,22 +90,8 @@ export default {
           {
             name: 'Temperature',
             type: 'line',
-            stack: 'Total',
             smooth: true,
-            lineStyle: {
-              width: 0
-            },
-            showSymbol: false,
-            areaStyle: {
-              opacity: 0.8,
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                offset: 0,
-                color: 'rgba(128, 255, 165)'
-              }, {
-                offset: 1,
-                color: 'rgba(1, 191, 236)'
-              }])
-            },
+            showSymbol: true,
             emphasis: {
               focus: 'series'
             },
@@ -122,38 +100,15 @@ export default {
           {
             name: 'Humidity',
             type: 'line',
-            stack: 'Total',
             smooth: true,
-            lineStyle: {
-              width: 0
-            },
-            showSymbol: false,
-            areaStyle: {
-              opacity: 0.8,
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                offset: 0,
-                color: 'rgba(0, 221, 255)'
-              }, {
-                offset: 1,
-                color: 'rgba(77, 119, 255)'
-              }])
-            },
+            showSymbol: true,
             emphasis: {
               focus: 'series'
             },
             data: this.getHumidityList()
           }
         ]
-      },
-      line_chart: null
-    }
-  },
-  mounted () {
-    this.init()
-  },
-  watch: {
-    '$q.dark.isActive': function () {
-      this.init()
+      }
     }
   }
 }
